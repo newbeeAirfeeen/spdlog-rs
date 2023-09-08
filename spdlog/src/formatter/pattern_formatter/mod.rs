@@ -71,17 +71,17 @@ use crate::{
 /// ```
 /// # use spdlog::formatter::{pattern, PatternFormatter};
 /// use spdlog::info;
-#[doc = include_str!("../../include/doc/test_utils.rs")]
+#[doc = include_str!(concat!(env!("OUT_DIR"), "/test_utils/common_for_doc_test.rs"))]
 ///
 /// let formatter = PatternFormatter::new(pattern!("[{level}] {payload}"));
-/// # let (doctest, sink) = doc_test_utils::echo_logger_from_formatter(
+/// # let (doctest, sink) = test_utils::echo_logger_from_formatter(
 /// #     Box::new(formatter),
 /// #     None
 /// # );
 ///
 /// info!(logger: doctest, "Interesting log message");
 /// # assert_eq!(
-/// #     String::from_utf8(sink.clone_target()).unwrap(),
+/// #     sink.clone_string(),
 /// /* Output */ "[info] Interesting log message"
 /// # );
 /// ```
@@ -97,16 +97,16 @@ use crate::{
 /// #     formatter::{pattern, PatternFormatter},
 /// #     info,
 /// # };
-#[doc = include_str!("../../include/doc/test_utils.rs")]
+#[doc = include_str!(concat!(env!("OUT_DIR"), "/test_utils/common_for_doc_test.rs"))]
 /// let formatter = PatternFormatter::new(pattern!("[{{escaped}}] {payload}"));
-/// # let (doctest, sink) = doc_test_utils::echo_logger_from_formatter(
+/// # let (doctest, sink) = test_utils::echo_logger_from_formatter(
 /// #     Box::new(formatter),
 /// #     None
 /// # );
 ///
 /// info!(logger: doctest, "Interesting log message");
 /// # assert_eq!(
-/// #     String::from_utf8(sink.clone_target()).unwrap(),
+/// #     sink.clone_string(),
 /// /* Output */ "[{escaped}] Interesting log message"
 /// # );
 /// ```
@@ -126,16 +126,16 @@ use crate::{
 /// #     formatter::{pattern, PatternFormatter},
 /// #     info,
 /// # };
-#[doc = include_str!("../../include/doc/test_utils.rs")]
+#[doc = include_str!(concat!(env!("OUT_DIR"), "/test_utils/common_for_doc_test.rs"))]
 /// let formatter = PatternFormatter::new(pattern!("{^[{level}]} {payload}"));
-/// # let (doctest, sink) = doc_test_utils::echo_logger_from_formatter(
+/// # let (doctest, sink) = test_utils::echo_logger_from_formatter(
 /// #     Box::new(formatter),
 /// #     None
 /// # );
 ///
 /// info!(logger: doctest, "Interesting log message");
 /// # assert_eq!(
-/// #     String::from_utf8(sink.clone_target()).unwrap(),
+/// #     sink.clone_string(),
 /// /* Output */ "[info] Interesting log message"
 /// //            ^^^^^^ <- style range
 /// # );
@@ -155,7 +155,7 @@ use crate::{
 ///     formatter::{pattern, Pattern, PatternContext, PatternFormatter},
 ///     Record, StringBuf, info
 /// };
-#[doc = include_str!("../../include/doc/test_utils.rs")]
+#[doc = include_str!(concat!(env!("OUT_DIR"), "/test_utils/common_for_doc_test.rs"))]
 ///
 /// #[derive(Default, Clone)]
 /// struct MyPattern;
@@ -175,14 +175,14 @@ use crate::{
 ///     {$mypat} => MyPattern::default,
 /// );
 /// let formatter = PatternFormatter::new(pat);
-/// # let (doctest, sink) = doc_test_utils::echo_logger_from_formatter(
+/// # let (doctest, sink) = test_utils::echo_logger_from_formatter(
 /// #     Box::new(formatter),
 /// #     None
 /// # );
 ///
 /// info!(logger: doctest, "Interesting log message");
 /// # assert_eq!(
-/// #   String::from_utf8(sink.clone_target()).unwrap(),
+/// #   sink.clone_string(),
 /// /* Output */ "[info] Interesting log message - My own pattern"
 /// # );
 /// ```
@@ -213,7 +213,7 @@ use crate::{
 /// #     prelude::*,
 /// #     Record, StringBuf,
 /// # };
-#[doc = include_str!("../../include/doc/test_utils.rs")]
+#[doc = include_str!(concat!(env!("OUT_DIR"), "/test_utils/common_for_doc_test.rs"))]
 /// static NEXT_ID: AtomicU32 = AtomicU32::new(0);
 ///
 /// #[derive(Clone)]
@@ -244,14 +244,14 @@ use crate::{
 ///     {$mypat} => MyPattern::new,
 /// );
 /// let formatter = PatternFormatter::new(pat);
-/// # let (doctest, sink) = doc_test_utils::echo_logger_from_formatter(
+/// # let (doctest, sink) = test_utils::echo_logger_from_formatter(
 /// #     Box::new(formatter),
 /// #     None
 /// # );
 ///
 /// info!(logger: doctest, "Interesting log message");
 /// # assert_eq!(
-/// #   String::from_utf8(sink.clone_target()).unwrap(),
+/// #   sink.clone_string(),
 /// /* Output */ "[info] Interesting log message - 0 1 2"
 /// # );
 /// ```
